@@ -1,0 +1,7 @@
+# Alle Textdateien mit Unix-Zeilenenden (LF) auschecken – wichtig für die
+# Shell-Skripte, die auf macOS laufen (CRLF würde sie unbrauchbar machen).
+* text=auto eol=lf
+*.command text eol=lf
+*.mjs     text eol=lf
+*.yml     text eol=lf
+*.md      text eol=lf
