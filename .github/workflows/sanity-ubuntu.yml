@@ -1,0 +1,16 @@
+name: Sanity (Linux)
+
+# Nur zur Diagnose: läuft Actions für dieses Konto überhaupt?
+# Linux-Runner sind sofort verfügbar. Läuft dieser Job grün, aber der Mac-Job bleibt
+# "Queued", ist ausschließlich der macOS-Runner gesperrt (meist: Konto braucht eine
+# verifizierte Zahlungsmethode, bevor Mac-Runner freigegeben werden).
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  sanity:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Actions laeuft. ($(uname -a))"
