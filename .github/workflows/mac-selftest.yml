@@ -1,0 +1,31 @@
+name: Mac-Selbsttest
+
+# Läuft bei jedem Push und per Hand (Actions-Reiter → "Run workflow").
+# Startet einen echten Cloud-Mac (macOS, Apple Silicon) und prüft den Mac-spezifischen
+# Teil der Korrekturhub-Adobe-Module OHNE Adobe-Software:
+#   - macOS-Schlüsselbund (security add/find/delete-generic-password) – Token-Ablage
+#   - open / security vorhanden
+# Grün = die Mac-Plumbing funktioniert. Der echte Export in den Adobe-Programmen wird
+# damit NICHT geprüft (dafür braucht es einen Mac MIT Adobe).
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  selftest:
+    runs-on: macos-14
+    steps:
+      - name: Code holen
+        uses: actions/checkout@v4
+
+      - name: Umgebung anzeigen
+        run: |
+          echo "macOS: $(sw_vers -productVersion)"
+          echo "Node:  $(node --version)"
+
+      - name: Selbsttest (Node – maßgeblich)
+        run: node mac-selftest.mjs
+
+      - name: Selbsttest (Shell – wie der Doppelklick-Test)
+        run: bash mac-selbsttest.command < /dev/null
