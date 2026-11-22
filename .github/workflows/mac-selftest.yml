@@ -14,7 +14,9 @@ on:
 
 jobs:
   selftest:
-    runs-on: macos-14
+    # macos-13 (Intel) ist auf dem Free-Plan verfügbar; für den Schlüsselbund-/open-Test
+    # spielt die Architektur keine Rolle. (macos-14/ARM ist hier nicht freigeschaltet.)
+    runs-on: macos-13
     steps:
       - name: Code holen
         uses: actions/checkout@v4
