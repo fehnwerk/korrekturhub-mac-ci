@@ -1,0 +1,27 @@
+name: Mac-Image-Probe
+
+# Diagnose: Welches macOS-Image darf dieses Konto nutzen?
+# Startet drei Jobs parallel (macos-15, macos-14, macos-13). fail-fast=false,
+# damit ein fehlschlagendes/abgelehntes Image die anderen nicht abbricht.
+# Grün bei einem Image = dieses Image funktioniert -> mac-selftest.yml darauf umstellen.
+# Nach der Diagnose wieder entfernen.
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-15, macos-14, macos-13]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Umgebung anzeigen
+        run: |
+          echo "Label:  ${{ matrix.os }}"
+          echo "macOS:  $(sw_vers -productVersion)"
+          echo "Arch:   $(uname -m)"
+          echo "security: $(command -v security)"
+          echo "open:     $(command -v open)"
