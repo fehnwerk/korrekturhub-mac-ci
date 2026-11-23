@@ -8,8 +8,11 @@ name: Mac-Selbsttest
 # Grün = die Mac-Plumbing funktioniert. Der echte Export in den Adobe-Programmen wird
 # damit NICHT geprüft (dafür braucht es einen Mac MIT Adobe).
 
+# Nur manuell (Actions-Reiter -> "Run workflow"). Das Konto hat noch KEINE
+# macOS-Runner freigeschaltet (GitHub-Support-Ticket läuft), darum lösen Pushes
+# bewusst keinen Mac-Job aus – der würde sonst nur endlos "Queued" bleiben.
+# Sobald GitHub die Mac-Runner freischaltet: hier von Hand starten.
 on:
-  push:
   workflow_dispatch:
 
 jobs:
